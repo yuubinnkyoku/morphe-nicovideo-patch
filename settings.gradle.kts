@@ -1,4 +1,4 @@
-rootProject.name = "morphe-patches-template"
+rootProject.name = "morphe-nicovideo-patch"
 
 pluginManagement {
     repositories {
