@@ -12,6 +12,23 @@
 ## パッチ
 
 <!-- PATCHES_START EXPANDED -->
+> **[v1.0.0-dev.1](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;2 patches total
+<details open>
+<summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 🧪&nbsp;9.16.3 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Enable background playback](#enable-background-playback) | Uses the app's existing background audio service when the background-play setting is enabled. |  |
+| [Enable picture-in-picture](#enable-picture-in-picture) | Enables the app's existing PiP playback path while retaining Android's PiP support and permission checks. |  |
+
+</details>
+
 <!-- PATCHES_END -->
 
 2つのパッチは独立して選択できます。アカウント全体のプレミアム会員情報は変更しません。

@@ -1,7 +1,7 @@
 {
-  "created_at": "",
-  "description": "",
-  "download_url": "",
+  "created_at": "2026-10-21T08:29:46",
+  "description": "## 1.0.0-dev.1 (2026-10-21)\n\n### 🐛 Bug Fixes\n\n* restore README markers required for automated patch releases ([117c3f0](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/117c3f0b5dbf47c3925338887333445b592613a9))\n\n### ✨ New Features\n\n* add niconico 9.16.3 PiP and background playback patches ([0529f53](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/0529f53fb377f37fa955b92dfe13ad039086537c))",
+  "download_url": "https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/download/v1.0.0-dev.1/patches-1.0.0-dev.1.mpp",
   "signature_download_url": "",
-  "version": ""
+  "version": "1.0.0-dev.1"
 }
