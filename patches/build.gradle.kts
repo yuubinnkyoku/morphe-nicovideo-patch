@@ -1,14 +1,13 @@
-group = "app.template"
+group = "app.yuubinnkyoku.nicovideo"
 
 patches {
-    // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
-        contact = "na"
-        website = "na"
+        name = "yuubinnkyoku niconico patches"
+        description = "Video playback patches for the niconico Android application"
+        source = "https://github.com/yuubinnkyoku/morphe-nicovideo-patch"
+        author = "yuubinnkyoku"
+        contact = "https://github.com/yuubinnkyoku/morphe-nicovideo-patch/issues"
+        website = "https://github.com/yuubinnkyoku/morphe-nicovideo-patch"
         license = "GPLv3"
     }
 }
