@@ -11,10 +11,8 @@
 
 ## パッチ
 
-| 名前 | 内容 |
-| --- | --- |
-| Enable picture-in-picture | 既存の PiP 処理を有効化。Android の対応状況と PiP 許可はそのまま確認 |
-| Enable background playback | 既存のバックグラウンド音声再生処理を有効化。アプリの `background_play` 設定や再生制限は維持 |
+<!-- PATCHES_START EXPANDED -->
+<!-- PATCHES_END -->
 
 2つのパッチは独立して選択できます。アカウント全体のプレミアム会員情報は変更しません。
 
