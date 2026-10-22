@@ -94,14 +94,23 @@ val loginDiagnosticsPatch = bytecodePatch(
         if (errorBuilderIndex < 0)
             throw PatchException("Could not locate App Check error logger (new-instance Lzs;)")
 
-        // High instruction indexes first so earlier offsets remain correct.
+        // The exception handler executes a goto to the labeled NEW_INSTANCE.
+        // An injected instruction *before* that target is skipped by the jump.
+        // Inject AFTER new-instance to ensure the failure is observed.
+        // Highest indexes first so previous instruction offsets stay stable.
         appCheckMethod.addInstruction(
-            errorBuilderIndex,
+            errorBuilderIndex + 1,
             "invoke-static {p0}, $DIAGNOSTICS->recordAppCheckFailure(Ljava/lang/Throwable;)V"
         )
         appCheckMethod.addInstruction(
             tokenFieldIndex + 1,
             "invoke-static {p0}, $DIAGNOSTICS->recordAppCheckResult(Ljava/lang/String;)V"
+        )
+        // Observe entry even if the result/failure hooks are bypassed by
+        // unexpected control flow. No app behavior is changed.
+        appCheckMethod.addInstruction(
+            0,
+            "invoke-static {}, $DIAGNOSTICS->recordAppCheckEntered()V"
         )
 
         // 2. Observe the token argument passed into the serialized API request.

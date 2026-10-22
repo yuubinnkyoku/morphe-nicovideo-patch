@@ -30,9 +30,16 @@ public final class LoginDiagnostics {
     // Latest observation from this process; expected to be from the current
     // login attempt. Values are strictly non-secret, fixed-state metadata.
     private static volatile String appCheckAcquisition = "not observed";
+    private static volatile int appCheckInvocationCount = 0;
     private static volatile String appCheckErrorType = "none";
     private static volatile String passportTokenArgument = "not observed";
     private static volatile String passportHttpStatus = "not observed";
+
+    public static void recordAppCheckEntered() {
+        appCheckInvocationCount++;
+        appCheckAcquisition = "entered (outcome not observed yet)";
+        appCheckErrorType = "none";
+    }
 
     public static void recordAppCheckResult(String token) {
         appCheckAcquisition = token == null ? "null (no token returned)"
@@ -107,12 +114,13 @@ public final class LoginDiagnostics {
     private static String makeReport(Context context, Object code, String message) {
         PackageManager pm = context.getPackageManager();
         StringBuilder report = new StringBuilder(850);
-        report.append("Morphe niconico login diagnostics v2\n");
+        report.append("Morphe niconico login diagnostics v3\n");
         report.append("Time: ")
             .append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(new Date()))
             .append('\n');
         report.append("Login error code: ").append(code == null ? "unknown" : code.toString()).append('\n');
         report.append("Shown message: ").append(message == null ? "none" : message).append('\n');
+        report.append("App Check method calls: ").append(appCheckInvocationCount).append('\n');
         report.append("App Check acquisition: ").append(appCheckAcquisition).append('\n');
         report.append("App Check exception type: ").append(appCheckErrorType).append('\n');
         report.append("Passport request appCheckToken argument: ").append(passportTokenArgument).append('\n');
