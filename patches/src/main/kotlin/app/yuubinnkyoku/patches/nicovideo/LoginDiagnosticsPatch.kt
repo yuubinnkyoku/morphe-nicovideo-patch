@@ -85,12 +85,14 @@ val loginDiagnosticsPatch = bytecodePatch(
             field?.definingClass == "Lgq1;" && field.name == "a" && field.type == "Ljava/lang/String;"
         }
         val errorBuilderIndex = appCheckInstructions.indexOfFirst {
-            val instruction = it as? ReferenceInstruction
-            val type = instruction?.reference?.toString() ?: ""
-            it.opcode.name == "NEW_INSTANCE" && type == "Lzs;"
+            val reference = (it as? ReferenceInstruction)?.reference
+            it.opcode == com.android.tools.smali.dexlib2.Opcode.NEW_INSTANCE &&
+                (reference as? com.android.tools.smali.dexlib2.iface.reference.TypeReference)?.type == "Lzs;"
         }
-        if (tokenFieldIndex < 0 || errorBuilderIndex < 0)
-            throw PatchException("Could not locate niconico App Check acquisition result/error")
+        if (tokenFieldIndex < 0)
+            throw PatchException("Could not locate App Check result field (Lgq1;->a)")
+        if (errorBuilderIndex < 0)
+            throw PatchException("Could not locate App Check error logger (new-instance Lzs;)")
 
         // High instruction indexes first so earlier offsets remain correct.
         appCheckMethod.addInstruction(
