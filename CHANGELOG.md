@@ -1,3 +1,9 @@
+## [1.0.0-dev.7](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2026-10-22)
+
+### ✨ New Features
+
+* add privacy-safe App Check exception cause and reason diagnostics ([184cfd1](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/184cfd17b680f29864e8b3184f435cd1ba91c6e3))
+
 ## [1.0.0-dev.6](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2026-10-22)
 
 ### 🐛 Bug Fixes
