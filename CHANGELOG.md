@@ -1,3 +1,9 @@
+## [1.0.0-dev.8](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2026-10-22)
+
+### ✨ New Features
+
+* add isolated niconico 8.55.0 legacy login re-sign experiment ([860461b](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/860461b645384e5fbde7b398e80eb4785ff102d6))
+
 ## [1.0.0-dev.7](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2026-10-22)
 
 ### ✨ New Features

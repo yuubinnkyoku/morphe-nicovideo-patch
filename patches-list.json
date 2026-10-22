@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0-dev.7",
+  "version": "1.0.0-dev.8",
   "patches": [
     {
       "name": "Diagnostic: re-sign only (no changes)",
@@ -116,6 +116,37 @@
                 "ARMEABI_V7A": 479,
                 "X86_64": 479,
                 "X86": 479
+              },
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "niconico 8.55.0: re-sign/login test (no changes)",
+      "description": "For niconico 8.55.0 only. Repack/re-sign without bytecode edits to check whether its older login API still authenticates. Experimental.",
+      "default": false,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "jp.nicovideo.android",
+          "name": "ニコニコ動画 (8.55.0 / legacy)",
+          "description": null,
+          "apkFileType": "APKS",
+          "appIconColor": "#252525",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.55.0",
+              "versionCodes": {
+                "ARM64_V8A": 450,
+                "ARMEABI_V7A": 450,
+                "X86_64": 450,
+                "X86": 450
               },
               "isExperimental": true,
               "minSdk": null,
