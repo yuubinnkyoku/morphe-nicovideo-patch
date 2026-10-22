@@ -1,3 +1,9 @@
+## [1.0.0-dev.4](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2026-10-22)
+
+### ✨ New Features
+
+* trace App Check acquisition and passport HTTP status in login diagnostics ([728d60a](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/728d60a20b19ae8f9f08b6bde1555353e9eadc88))
+
 ## [1.0.0-dev.3](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-10-22)
 
 ### ✨ New Features

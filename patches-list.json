@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0-dev.3",
+  "version": "1.0.0-dev.4",
   "patches": [
     {
       "name": "Diagnostic: re-sign only (no changes)",
@@ -97,7 +97,7 @@
     },
     {
       "name": "Login diagnostics: copy error report",
-      "description": "Show an in-app 'Copy log' dialog when login fails, with error code and signing/GMS environment details. No tokens or passwords are recorded.",
+      "description": "Copy a safe login diagnostic report with App Check token presence, Account Passport request token presence and HTTP status. Never copies tokens.",
       "default": false,
       "category": null,
       "compatiblePackages": [
