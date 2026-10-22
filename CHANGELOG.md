@@ -1,3 +1,9 @@
+## [1.0.0-dev.3](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-10-22)
+
+### ✨ New Features
+
+* add opt-in in-app login diagnostics with copyable report ([cc31e8e](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/cc31e8efb9a0aff53f8a3736543fa9b635e27117))
+
 ## [1.0.0-dev.2](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2026-10-22)
 
 ### ✨ New Features

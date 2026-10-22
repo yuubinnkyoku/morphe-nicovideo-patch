@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0-dev.2",
+  "version": "1.0.0-dev.3",
   "patches": [
     {
       "name": "Diagnostic: re-sign only (no changes)",
@@ -68,6 +68,37 @@
       "name": "Enable picture-in-picture",
       "description": "Enables the app's existing PiP playback path while retaining Android's PiP support and permission checks.",
       "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "jp.nicovideo.android",
+          "name": "ニコニコ動画",
+          "description": null,
+          "apkFileType": "APKS",
+          "appIconColor": "#252525",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "9.16.3",
+              "versionCodes": {
+                "ARM64_V8A": 479,
+                "ARMEABI_V7A": 479,
+                "X86_64": 479,
+                "X86": 479
+              },
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Login diagnostics: copy error report",
+      "description": "Show an in-app 'Copy log' dialog when login fails, with error code and signing/GMS environment details. No tokens or passwords are recorded.",
+      "default": false,
       "category": null,
       "compatiblePackages": [
         {

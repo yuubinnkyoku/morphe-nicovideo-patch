@@ -12,9 +12,9 @@
 ## パッチ
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0-dev.2](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
+> **[v1.0.0-dev.3](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;4 patches total
 <details open>
-<summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -27,6 +27,7 @@
 | [Diagnostic: re-sign only (no changes)](#diagnostic-re-sign-only-no-changes) | Diagnostic only: no app behavior changes. Select this alone to isolate APK repacking/re-signing from the playback patches. |  |
 | [Enable background playback](#enable-background-playback) | Uses the app's existing background audio service when the background-play setting is enabled. |  |
 | [Enable picture-in-picture](#enable-picture-in-picture) | Enables the app's existing PiP playback path while retaining Android's PiP support and permission checks. |  |
+| [Login diagnostics: copy error report](#login-diagnostics-copy-error-report) | Show an in-app 'Copy log' dialog when login fails, with error code and signing/GMS environment details. No tokens or passwords are recorded. |  |
 
 </details>
 
