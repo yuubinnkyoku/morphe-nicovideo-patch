@@ -1,3 +1,9 @@
+## [1.0.0-dev.6](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2026-10-22)
+
+### 🐛 Bug Fixes
+
+* capture App Check error path after jump label and trace entry ([5e7eac4](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/5e7eac4e2cedbb2c1ccd00a91f6e92f3196abe60))
+
 ## [1.0.0-dev.5](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2026-10-22)
 
 ### 🐛 Bug Fixes
