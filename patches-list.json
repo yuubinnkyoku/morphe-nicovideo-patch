@@ -1,7 +1,38 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0-dev.1",
+  "version": "1.0.0-dev.2",
   "patches": [
+    {
+      "name": "Diagnostic: re-sign only (no changes)",
+      "description": "Diagnostic only: no app behavior changes. Select this alone to isolate APK repacking/re-signing from the playback patches.",
+      "default": false,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "jp.nicovideo.android",
+          "name": "ニコニコ動画",
+          "description": null,
+          "apkFileType": "APKS",
+          "appIconColor": "#252525",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "9.16.3",
+              "versionCodes": {
+                "ARM64_V8A": 479,
+                "ARMEABI_V7A": 479,
+                "X86_64": 479,
+                "X86": 479
+              },
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
     {
       "name": "Enable background playback",
       "description": "Uses the app's existing background audio service when the background-play setting is enabled.",

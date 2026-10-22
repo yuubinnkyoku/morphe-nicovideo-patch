@@ -1,3 +1,9 @@
+## [1.0.0-dev.2](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2026-10-22)
+
+### ✨ New Features
+
+* add no-op signing diagnostic patch for login troubleshooting ([a372629](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/a372629a47043da4c9cda4c72bc4ee7c5d8c1eaa))
+
 ## 1.0.0-dev.1 (2026-10-21)
 
 ### 🐛 Bug Fixes
