@@ -20,15 +20,44 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Opt-in diagnostics for niconico login failures.
- *
- * This deliberately does not capture logcat, auth tokens, cookies, nonces,
- * passwords, server response bodies, or requests. Android does not permit an
- * ordinary app to read arbitrary system logcat.
+ * Read-only diagnostics. Never writes App Check tokens, OAuth codes, session
+ * values, PKCE verifiers, HTTP headers or response bodies to logs or clipboard.
  */
 @SuppressWarnings({"deprecation", "unused"})
 public final class LoginDiagnostics {
     private LoginDiagnostics() { }
+
+    // Latest observation from this process; expected to be from the current
+    // login attempt. Values are strictly non-secret, fixed-state metadata.
+    private static volatile String appCheckAcquisition = "not observed";
+    private static volatile String appCheckErrorType = "none";
+    private static volatile String passportTokenArgument = "not observed";
+    private static volatile String passportHttpStatus = "not observed";
+
+    public static void recordAppCheckResult(String token) {
+        appCheckAcquisition = token == null ? "null (no token returned)"
+            : token.length() == 0 ? "empty" : "nonempty token returned";
+        appCheckErrorType = "none";
+        passportTokenArgument = "not observed";
+        passportHttpStatus = "not observed";
+    }
+
+    public static void recordAppCheckFailure(Throwable error) {
+        appCheckAcquisition = "failed (null fallback)";
+        appCheckErrorType = error == null ? "unknown"
+            : error.getClass().getSimpleName();
+        passportTokenArgument = "not observed";
+        passportHttpStatus = "not observed";
+    }
+
+    public static void recordPassportToken(String token) {
+        passportTokenArgument = token == null ? "null"
+            : token.length() == 0 ? "empty" : "nonempty";
+    }
+
+    public static void recordPassportStatus(int httpStatus) {
+        passportHttpStatus = String.valueOf(httpStatus);
+    }
 
     public static void show(Context context, Object code, String message) {
         if (context == null) return;
@@ -53,12 +82,9 @@ public final class LoginDiagnostics {
                     .setNegativeButton("閉じる", null)
                     .show();
             } catch (RuntimeException ignored) {
-                // Diagnostics must never crash login UI.
+                // A diagnostic must not crash login UI.
             }
         };
-
-        // The original callback normally runs on the UI thread, but do not
-        // assume that on future builds.
         if (Looper.myLooper() == Looper.getMainLooper()) {
             present.run();
         } else {
@@ -80,13 +106,17 @@ public final class LoginDiagnostics {
 
     private static String makeReport(Context context, Object code, String message) {
         PackageManager pm = context.getPackageManager();
-        StringBuilder report = new StringBuilder(512);
-        report.append("Morphe niconico login diagnostics v1\n");
+        StringBuilder report = new StringBuilder(850);
+        report.append("Morphe niconico login diagnostics v2\n");
         report.append("Time: ")
             .append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(new Date()))
             .append('\n');
         report.append("Login error code: ").append(code == null ? "unknown" : code.toString()).append('\n');
         report.append("Shown message: ").append(message == null ? "none" : message).append('\n');
+        report.append("App Check acquisition: ").append(appCheckAcquisition).append('\n');
+        report.append("App Check exception type: ").append(appCheckErrorType).append('\n');
+        report.append("Passport request appCheckToken argument: ").append(passportTokenArgument).append('\n');
+        report.append("Passport API HTTP status: ").append(passportHttpStatus).append('\n');
         report.append("Package: ").append(context.getPackageName()).append('\n');
         report.append("Android SDK: ").append(Build.VERSION.SDK_INT).append('\n');
         report.append("Device: ").append(Build.MANUFACTURER).append(" ").append(Build.MODEL).append('\n');
@@ -99,8 +129,10 @@ public final class LoginDiagnostics {
             report.append("Installer: unavailable\n");
         }
         report.append("App signing certificate SHA-256: ").append(signingSha256(pm, context.getPackageName())).append('\n');
-        report.append("Play Integrity verdict: not accessible from this UI\n");
-        report.append("Note: Only the mapped login error and non-secret environment metadata are included.\n");
+        report.append("Play Integrity verdict: not available to app diagnostics\n");
+        report.append("Note: 'nonempty' means token is present, not that server accepted it.\n");
+        report.append("Note: Request argument presence does not prove network transmission.\n");
+        report.append("Note: No token, nonce, cookie, auth code or response body is captured.\n");
         return report.toString();
     }
 
@@ -121,9 +153,7 @@ public final class LoginDiagnostics {
                 Signature[] signers = info.signingInfo.getApkContentsSigners();
                 if (signers != null && signers.length > 0) signer = signers[0];
             }
-            if (signer == null) {
-                return "unavailable";
-            }
+            if (signer == null) return "unavailable";
             byte[] digest = MessageDigest.getInstance("SHA-256").digest(signer.toByteArray());
             StringBuilder hex = new StringBuilder(digest.length * 2);
             for (byte b : digest) hex.append(String.format(Locale.US, "%02x", b & 0xff));
