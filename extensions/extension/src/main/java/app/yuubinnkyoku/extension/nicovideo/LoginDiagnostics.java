@@ -32,6 +32,8 @@ public final class LoginDiagnostics {
     private static volatile String appCheckAcquisition = "not observed";
     private static volatile int appCheckInvocationCount = 0;
     private static volatile String appCheckErrorType = "none";
+    private static volatile String appCheckCauseChain = "not observed";
+    private static volatile String appCheckErrorIndicators = "not observed";
     private static volatile String passportTokenArgument = "not observed";
     private static volatile String passportHttpStatus = "not observed";
 
@@ -39,12 +41,16 @@ public final class LoginDiagnostics {
         appCheckInvocationCount++;
         appCheckAcquisition = "entered (outcome not observed yet)";
         appCheckErrorType = "none";
+        appCheckCauseChain = "none";
+        appCheckErrorIndicators = "none";
     }
 
     public static void recordAppCheckResult(String token) {
         appCheckAcquisition = token == null ? "null (no token returned)"
             : token.length() == 0 ? "empty" : "nonempty token returned";
         appCheckErrorType = "none";
+        appCheckCauseChain = "none";
+        appCheckErrorIndicators = "none";
         passportTokenArgument = "not observed";
         passportHttpStatus = "not observed";
     }
@@ -53,8 +59,92 @@ public final class LoginDiagnostics {
         appCheckAcquisition = "failed (null fallback)";
         appCheckErrorType = error == null ? "unknown"
             : error.getClass().getSimpleName();
+        appCheckCauseChain = describeCauseChain(error);
+        appCheckErrorIndicators = describeSafeIndicators(error);
         passportTokenArgument = "not observed";
         passportHttpStatus = "not observed";
+    }
+
+    /**
+     * Only exception class names and classified error indicators leave this
+     * method; raw Throwable messages can contain credentials and are withheld.
+     */
+    private static String describeCauseChain(Throwable error) {
+        if (error == null) return "unknown";
+        StringBuilder chain = new StringBuilder();
+        Throwable current = error;
+        for (int i = 0; i < 6 && current != null; i++) {
+            if (i > 0) chain.append(" -> ");
+            String name = current.getClass().getName();
+            chain.append(name.length() < 150 ? name : "unusual class name");
+            Throwable next;
+            try { next = current.getCause(); }
+            catch (RuntimeException ignored) { break; }
+            if (next == current) break;
+            current = next;
+        }
+        return chain.toString();
+    }
+
+    private static String describeSafeIndicators(Throwable error) {
+        StringBuilder indicators = new StringBuilder();
+        Throwable current = error;
+        for (int i = 0; i < 6 && current != null; i++) {
+            String message;
+            try { message = current.getMessage(); }
+            catch (RuntimeException ignored) { message = null; }
+            if (message != null) {
+                String lower = message.toLowerCase(Locale.US);
+                String category = classifyMessage(lower);
+                if (!"unclassified".equals(category)) {
+                    if (indicators.length() > 0) indicators.append("; ");
+                    indicators.append(category);
+                }
+                java.util.regex.Matcher matcher = java.util.regex.Pattern.compile(
+                    "(?i)integrity api error [(](-?[0-9]{1,4})[)]"
+                ).matcher(message);
+                if (matcher.find()) {
+                    if (indicators.length() > 0) indicators.append("; ");
+                    indicators.append("integrity-code=").append(matcher.group(1));
+                }
+            }
+            Throwable next;
+            try { next = current.getCause(); }
+            catch (RuntimeException ignored) { break; }
+            if (next == current) break;
+            current = next;
+        }
+        return indicators.length() == 0 ? "unclassified (message withheld)" : indicators.toString();
+    }
+
+    private static String classifyMessage(String text) {
+        if (text.contains("no appcheckprovider installed"))
+            return "provider_not_installed";
+        if (text.contains("integrity api error"))
+            return "play_integrity_api_error";
+        if (text.contains("app attestation failed"))
+            return "app_attestation_failed";
+        if (text.contains("firebase installations"))
+            return "firebase_installations_error";
+        if (text.contains("not registered"))
+            return "app_not_registered";
+        if (text.contains("permission denied") || text.contains("unauthorized"))
+            return "permission_denied";
+        if (text.contains("signature") || text.contains("signing certificate"))
+            return "signature_related";
+        if (text.contains("too many attempts") || text.contains("throttled")
+                || text.contains("too many requests"))
+            return "rate_limited";
+        if (text.contains("timeout") || text.contains("unknownhost")
+                || text.contains("could not connect"))
+            return "network_error";
+        if (text.contains("unexpected server response"))
+            return "unexpected_server_response";
+        if (text.contains("403") || text.contains("forbidden"))
+            return "http_forbidden";
+        if (text.contains("appcheck") || text.contains("app check"))
+            return "app_check_error";
+        return "unclassified";
     }
 
     public static void recordPassportToken(String token) {
@@ -114,7 +204,7 @@ public final class LoginDiagnostics {
     private static String makeReport(Context context, Object code, String message) {
         PackageManager pm = context.getPackageManager();
         StringBuilder report = new StringBuilder(850);
-        report.append("Morphe niconico login diagnostics v3\n");
+        report.append("Morphe niconico login diagnostics v4\n");
         report.append("Time: ")
             .append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(new Date()))
             .append('\n');
@@ -123,6 +213,8 @@ public final class LoginDiagnostics {
         report.append("App Check method calls: ").append(appCheckInvocationCount).append('\n');
         report.append("App Check acquisition: ").append(appCheckAcquisition).append('\n');
         report.append("App Check exception type: ").append(appCheckErrorType).append('\n');
+        report.append("App Check exception chain: ").append(appCheckCauseChain).append('\n');
+        report.append("App Check error indicators: ").append(appCheckErrorIndicators).append('\n');
         report.append("Passport request appCheckToken argument: ").append(passportTokenArgument).append('\n');
         report.append("Passport API HTTP status: ").append(passportHttpStatus).append('\n');
         report.append("Package: ").append(context.getPackageName()).append('\n');
