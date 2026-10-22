@@ -1,3 +1,9 @@
+## [1.0.0-dev.5](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2026-10-22)
+
+### 🐛 Bug Fixes
+
+* match smali new-instance opcode by enum rather than mnemonic string ([c131936](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/c131936e65dde850d9eea15f38a9f692c6cbb9dd))
+
 ## [1.0.0-dev.4](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2026-10-22)
 
 ### ✨ New Features
