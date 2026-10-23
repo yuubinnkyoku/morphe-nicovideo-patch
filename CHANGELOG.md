@@ -1,3 +1,13 @@
+## [1.0.0-dev.9](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2026-10-23)
+
+### 🐛 Bug Fixes
+
+* escape Kotlin inner class dollar in legacy login fingerprint ([1a7bc8c](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/1a7bc8cbee9968b4917347aa78800fc41f84f41a))
+
+### ✨ New Features
+
+* copy sanitized 8.55.0 legacy login error details from WL-EU ([8cb6557](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/8cb6557a3505d023f313296f2466100fd558c048))
+
 ## [1.0.0-dev.8](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2026-10-22)
 
 ### ✨ New Features

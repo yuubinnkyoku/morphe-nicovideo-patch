@@ -12,9 +12,9 @@
 ## パッチ
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0-dev.8](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
+> **[v1.0.0-dev.9](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;6 patches total
 <details open>
-<summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
+<summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -28,6 +28,7 @@
 | [Enable background playback](#enable-background-playback) | Uses the app's existing background audio service when the background-play setting is enabled. |  |
 | [Enable picture-in-picture](#enable-picture-in-picture) | Enables the app's existing PiP playback path while retaining Android's PiP support and permission checks. |  |
 | [Login diagnostics: copy error report](#login-diagnostics-copy-error-report) | Copy a safe login diagnostic report with App Check token presence, Account Passport request token presence and HTTP status. Never copies tokens. |  |
+| [niconico 8.55.0: copy legacy login error](#niconico-8-55-0-copy-legacy-login-error) | Display a copyable read-only report when old login returns WL-EU, including sanitized server error code and error type. |  |
 | [niconico 8.55.0: re-sign/login test (no changes)](#niconico-8-55-0-re-sign-login-test-no-changes) | For niconico 8.55.0 only. Repack/re-sign without bytecode edits to check whether its older login API still authenticates. Experimental. |  |
 
 </details>
