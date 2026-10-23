@@ -12,7 +12,7 @@
 ## パッチ
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0-dev.9](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;6 patches total
+> **[v1.0.0-dev.10](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/tag/v1.0.0-dev.10)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;6 patches total
 <details open>
 <summary>📦 ニコニコ動画&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>

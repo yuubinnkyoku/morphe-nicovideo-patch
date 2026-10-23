@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-23T07:01:31",
-  "description": "## [1.0.0-dev.9](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2026-10-23)\n\n### 🐛 Bug Fixes\n\n* escape Kotlin inner class dollar in legacy login fingerprint ([1a7bc8c](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/1a7bc8cbee9968b4917347aa78800fc41f84f41a))\n\n### ✨ New Features\n\n* copy sanitized 8.55.0 legacy login error details from WL-EU ([8cb6557](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/8cb6557a3505d023f313296f2466100fd558c048))",
-  "download_url": "https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/download/v1.0.0-dev.9/patches-1.0.0-dev.9.mpp",
+  "created_at": "2026-10-23T22:53:14",
+  "description": "## [1.0.0-dev.10](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2026-10-23)\n\n### ✨ New Features\n\n* display numeric OAuth and Passport HTTP statuses in copyable diagnostic ([b3fd0ed](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/b3fd0ed337f0032992121af10d895e228e4549d3))\n* trace only HTTP status codes for legacy login API responses ([455faab](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/455faab57d20cf0ad0688d2519ed797b74a90430))",
+  "download_url": "https://github.com/yuubinnkyoku/morphe-nicovideo-patch/releases/download/v1.0.0-dev.10/patches-1.0.0-dev.10.mpp",
   "signature_download_url": "",
-  "version": "1.0.0-dev.9"
+  "version": "1.0.0-dev.10"
 }

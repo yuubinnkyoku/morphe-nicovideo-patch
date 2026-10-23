@@ -1,3 +1,10 @@
+## [1.0.0-dev.10](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2026-10-23)
+
+### ✨ New Features
+
+* display numeric OAuth and Passport HTTP statuses in copyable diagnostic ([b3fd0ed](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/b3fd0ed337f0032992121af10d895e228e4549d3))
+* trace only HTTP status codes for legacy login API responses ([455faab](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/commit/455faab57d20cf0ad0688d2519ed797b74a90430))
+
 ## [1.0.0-dev.9](https://github.com/yuubinnkyoku/morphe-nicovideo-patch/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2026-10-23)
 
 ### 🐛 Bug Fixes
