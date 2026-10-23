@@ -36,7 +36,7 @@ private object LegacyLoginSnackbar : Fingerprint(
     parameters = listOf(
         "Landroid/view/View;",
         "Ljava/lang/String;",
-        "Lnm/d0$b;"
+        "Lnm/d0\$b;"
     )
 )
 
