@@ -2,6 +2,7 @@ package app.yuubinnkyoku.patches.nicovideo
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
@@ -81,6 +82,31 @@ val legacy855LoginDiagnosticsPatch = bytecodePatch(
             0,
             "invoke-static {p2}, $LEGACY_DIAGNOSTICS->recordErrorType(Ljava/lang/Object;)V"
         )
+
+
+        // Observe HTTP statuses from the original Retrofit Response objects.
+        // No response bodies, OAuth credentials or request headers are read.
+        val network = classDefBy("Ljp/co/dwango/android/nicoca/account/c;")
+            .methods.first { it.name == "f" && it.parameterTypes.size == 6 }
+        val method = mutableClassDefBy("Ljp/co/dwango/android/nicoca/account/c;")
+            .methods.first { it.name == network.name && it.parameterTypes.size == 6 }
+        val instructions = method.implementation!!.instructions.toList()
+        val responseChecks = instructions.indices.filter { index ->
+            val ref = (instructions[index] as? ReferenceInstruction)?.reference as? MethodReference
+            ref?.definingClass == "Lyx/r;" && ref.name == "e" &&
+                ref.parameterTypes.isEmpty() && ref.returnType == "Z"
+        }
+        if (responseChecks.size != 2) {
+            throw PatchException("Expected two login API response checks; found " + responseChecks.size)
+        }
+        responseChecks.asReversed().forEachIndexed { reverseIndex, index ->
+            val hookName = if (reverseIndex == 0) "recordPassportHttpStatus" else "recordOauthHttpStatus"
+            method.addInstructions(index, """
+                invoke-virtual {v0}, Lyx/r;->b()I
+                move-result v3
+                invoke-static {v3}, $LEGACY_DIAGNOSTICS->$hookName(I)V
+            """.trimIndent())
+        }
 
         val uiMethod = LegacyLoginSnackbar.method
         uiMethod.addInstruction(
