@@ -22,11 +22,23 @@ import java.util.Locale;
 public final class LegacyLoginDiagnostics {
     private static volatile String errorType = "not observed";
     private static volatile String errorCode = "not observed";
+    private static volatile String oauthHttpStatus = "not observed";
+    private static volatile String passportHttpStatus = "not observed";
     private LegacyLoginDiagnostics() { }
 
     public static void recordErrorType(Object error) {
         errorType = error == null ? "null" : error.getClass().getName();
         errorCode = "not observed";
+    }
+
+    /** Records only the numeric HTTP status; never receives a response body. */
+    public static void recordOauthHttpStatus(int status) {
+        oauthHttpStatus = status >= 100 && status <= 599 ? String.valueOf(status) : "invalid";
+        passportHttpStatus = "not observed";
+    }
+
+    public static void recordPassportHttpStatus(int status) {
+        passportHttpStatus = status >= 100 && status <= 599 ? String.valueOf(status) : "invalid";
     }
 
     public static void recordErrorCode(String rawErrorCode) {
@@ -75,12 +87,14 @@ public final class LegacyLoginDiagnostics {
 
     private static String buildReport(Context context) {
         StringBuilder s = new StringBuilder(400);
-        s.append("Morphe niconico 8.55.0 legacy login diagnostics v1\n");
+        s.append("Morphe niconico 8.55.0 legacy login diagnostics v2\n");
         s.append("Time: ").append(new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss Z", Locale.US).format(new Date())).append('\n');
         s.append("Displayed login error: WL-EU\n");
         s.append("Account Passport error type: ").append(errorType).append('\n');
         s.append("Account Passport error code: ").append(errorCode).append('\n');
+        s.append("OAuth token API HTTP status: ").append(oauthHttpStatus).append('\n');
+        s.append("Account Passport API HTTP status: ").append(passportHttpStatus).append('\n');
         s.append("Package: ").append(context.getPackageName()).append('\n');
         s.append("Android SDK: ").append(Build.VERSION.SDK_INT).append('\n');
         try {
@@ -92,7 +106,8 @@ public final class LegacyLoginDiagnostics {
             s.append("App version: unavailable\n");
         }
         s.append("Note: Only a sanitized API error identifier and class are recorded.\n");
-        s.append("Note: Does not reveal server response contents or HTTP status.\n");
+        s.append("Note: Only numeric HTTP codes are observed from Retrofit responses.\n");
+        s.append("Note: No tokens, request headers or response bodies are logged.\n");
         return s.toString();
     }
 
